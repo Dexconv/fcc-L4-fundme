@@ -1,30 +1,51 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
 
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "./PriceConvertor.sol";
 
 contract FundMe{
+    using PriceConvertor for uint256;
     uint256 public minimumUsd = 50 * 1e18;
 
+    address[] public founders;
+
+    mapping (address => uint256) public addressToAmountFunded;
+
+    address public owner;
+
+    constructor(){
+        owner = msg.sender;
+    }
+
     function fund() public payable{
-        require(getConversionRate(msg.value) >= minimumUsd , "not enough sent!"); //1e18 = 1eth
+        require(msg.value.getConversionRate() >= minimumUsd , "not enough sent!"); //1e18 = 1eth
+        founders.push(msg.sender);
+        addressToAmountFunded[msg.sender] = msg.value;
     }
 
-    function getPrice() public view returns (uint256) {
-        //address : 0x8A753747A1Fa494EC906cE90E9f37563A8AF630e
-        AggregatorV3Interface dataFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
-        (,int256 price,,,) = dataFeed.latestRoundData();
-        return uint256(price * 1e10);
+    function withdraw ()public onlyOwner {
+        for (uint256 i = 0; i < founders.length; i++){
+            address founder = founders[i];
+            addressToAmountFunded[founder] = 0;
+        }
+        founders = new address[](0);
+
+        //withdraw the funds
+
+        //automatically revevrts
+        //payable(msg.sender).transfer(address(this).balance);
+
+        //returns a bool and should use require to revert
+        //bool sendSuccess = payable(msg.sender).send(address(this).balance);
+        //require(sendSuccess, "send failed!");
+
+        (bool callSuccess,)=payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "call failed!");
     }
 
-    function getVersion() public view returns(uint256){
-        AggregatorV3Interface dataFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
-        return dataFeed.version();
+    modifier onlyOwner {
+        require(msg.sender == owner, "sender is not the owner!");
+        _;
     }
-
-    function getConversionRate(uint256 _ethAmount)public view returns(uint256){
-        return (_ethAmount * getPrice()) / 1e18;
-    }
-
-    //function withdraw(){}
+    //5:01:13
 }
