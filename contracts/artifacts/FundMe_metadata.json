@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.8+commit.dddeac2f"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -9,6 +9,19 @@
 				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "MINIMUM_USD",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -57,20 +70,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "minimumUsd",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
+				"name": "i_owner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -117,19 +117,19 @@
 	},
 	"sources": {
 		"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
-			"keccak256": "0xf2b6c9adb3552254df1445b73563cf014434ff5e78663e9b961b6c059506ceb5",
+			"keccak256": "0x6e6e4b0835904509406b070ee173b5bc8f677c19421b76be38aea3b1b3d30846",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6c1f59e0c7334c22fb54288728fc32546bdc9c8133d6db0d60223e3c28f52120",
-				"dweb:/ipfs/QmeuxawUVBhMWQJXaEhhnubCTc4Jwn5wYK8gbhq6NjrpfG"
+				"bzz-raw://b3beaa37ee61e4ab615e250fbf01601ae481de843fd0ef55e6b44fd9d5fff8a7",
+				"dweb:/ipfs/QmeZUVwd26LzK4Mfp8Zba5JbQNkZFfTzFu1A6FVMMZDg9c"
 			]
 		},
 		"contracts/FundMe.sol": {
-			"keccak256": "0xb0d5d7e7e3a73dc5aaa9660dcb5b57fd3359805b9b10cbc0109cc04f7f685a32",
+			"keccak256": "0x61983abca7245ebfede5ba21a518f9442db44fefc43c6096feb730ee871d4db8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7ddd28fdef741a12f506a9ee5d1729a9ea12af07714a2f9c37a6265d0bf71017",
-				"dweb:/ipfs/QmWuBwndkCpGBxkVyHZ8W79HiNUx413hsML2pZDE4vJ4XV"
+				"bzz-raw://090392fe2a2a1c2dc632c839a2d16ae55dd72ee41f61e0966e88d712a7cdfaf1",
+				"dweb:/ipfs/Qmd3TKWFBDkpZTq5xsA7oP1gzMNagbiJnXNt9Rg6zgKbp2"
 			]
 		},
 		"contracts/PriceConvertor.sol": {
